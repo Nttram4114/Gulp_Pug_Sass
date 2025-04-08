@@ -1,0 +1,99 @@
+.about {
+	padding-top: 9.3rem;
+	padding-bottom: 11rem;
+	background-color: white;
+
+	&-list {
+		display: flex;
+		flex-wrap: wrap;
+		margin-left: -3rem;
+		padding: 0 12rem;
+	}
+
+	&-item {
+		margin-left: 3rem;
+		width: calc(33.33% - 3rem);
+		position: relative;
+		z-index: 1;
+		transition: transform 0.25s linear;
+	}
+	&-item::after{
+		content:"";
+		@include absoluteFull();
+		background-color: $third-color;
+		z-index: -1;
+		transition: transform 0.25s linear;
+	}
+	&-item:hover {
+		transform: translate(-1rem, -1rem);
+		.about-content {
+			opacity: 1;
+			visibility: visible;
+		}
+		&:after{
+			transform: translate(1rem, 1rem)
+		}
+	}
+
+	&-content {
+		@include absoluteFull();
+		opacity: 0;
+		visibility: hidden;
+		transition: all 0.25s linear;
+		background:	linear-gradient(
+			to bottom, 
+			rgba($primary-color, 0.8),
+			rgba( $secondary-color, 0.9)
+		);
+		z-index: 2;
+		color: white;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		text-transform: uppercase;
+		text-align: center;
+		padding: 2rem;
+	}
+
+	&-title {
+		font-weight: bold;
+		font-size: 1.8rem;
+		line-height: 1.4;
+		@include textclamp(1);
+	}
+
+	&-icon {
+		font-size: 2rem;
+		margin-bottom: 1rem;
+	}
+
+
+	@include maxWidth(767px){
+		padding-top: 5rem;
+		padding-bottom: 5rem;
+		
+		// Flexbox reponsive about-list
+		&-item {
+			width: 100%;
+			margin-bottom: 2.5rem;
+		}
+		// CSS Scroll snap
+		&-list {
+			display: flex;
+			flex-wrap: nowrap; /* Đổi từ wrap sang nowrap để scroll ngang */
+			margin-left: -3rem;
+			overflow-x: auto; /* Cho phép scroll ngang */
+			scroll-snap-type: x mandatory; /* Scroll snap theo trục X, bắt buộc */
+			-webkit-overflow-scrolling: touch;
+			margin-left: 2rem;
+			padding: 0 3rem;
+
+		  }
+		
+		  &-item {
+			scroll-snap-align: center; // căn giữa ảnh khi lướt
+			flex-shrink: 0; 
+		  }
+	}
+}

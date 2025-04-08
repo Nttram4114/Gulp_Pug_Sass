@@ -1,0 +1,251 @@
+@import '../helpers/var';  
+@import "../helpers/mixins";
+
+.header {
+	min-height: 100rem;
+	background:	linear-gradient(
+			to bottom, 
+			rgba($primary-color, 0.8),
+			rgba( $secondary-color, 0.9)
+			),
+		url("../images/DaiBang.jpg") no-repeat center / cover;
+	color: white;
+
+	&-logo {
+		font-size: 3rem;
+		font-weight: bold;
+		color: white;
+	}
+
+	&-toggle {
+		display: none;
+		font-size: 2rem;
+		cursor: pointer;
+	}
+
+
+	&-menu-link {
+		text-transform: uppercase;
+		display: inline-block;
+		transition: all 0.15s linear;
+	}
+
+
+	&-menu-icon{
+		color: white;
+	}
+
+	&-top {
+		padding-top: 3rem;
+		display: flex; 					// định dạng phần tử ngang
+		justify-content: space-between; // xếp các ptu cạnh nhau
+		align-items: baseline; 
+	}
+
+	&-menu {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&-content {
+		padding-top: 17rem;
+		text-align: center;
+		max-width: 85rem;
+		margin: 0 auto;
+	}
+
+	&-content-caption {
+		font-size: 7.5rem;
+		font-family: $third-font;
+		margin-bottom: 3rem;
+	}
+
+	&-content-main {
+		font-size: 15rem;
+		font-weight: 750;
+		text-transform: uppercase;
+		padding-bottom: 7rem;
+		margin-bottom: 5rem;
+		position: relative;
+		&::after{
+			content:"";
+			bottom: 0;
+			@include absoluteCenter();
+			width: 7rem;
+			height: 0.4rem;
+			background-color: white;
+		}
+	}
+
+	&-content-more {
+		font-style: 1.4rem;
+		text-transform: uppercase;
+		font-weight: bold;
+		padding: 1rem 3rem;
+		border: 0.5rem solid white;
+		color: white;
+		display: inline-block;
+	}
+
+	&-bottom {
+		margin-top: 15rem;
+		padding-bottom: 2.5rem;
+		display: flex;
+		flex-wrap: wrap;
+
+		&-item {
+			padding-top: 2.5rem;
+			border-top: 5px solid white;
+			width: calc(25% - 3rem);
+			margin-left: 3rem;
+			opacity: 0.6;
+			position: relative;
+			cursor: pointer;
+			transition: all 0.2s linear;
+		}
+
+		// thanh boder màu đỏ nằm chồng lên thanh boder trắng
+		&-item:before{
+			content: "";
+			@include size(7rem, 5px);
+			background-color: $primary-color;
+			position: absolute;
+			top: 0;
+			left: 0;
+			transform: translateY(-100%); // di chuyển lên trên bằng với kích thước của border 
+			opacity: 0;
+			transition: all 0.2s linear;
+		}
+
+		&-item:hover,
+		&-item.is-active {
+			opacity: 1;
+			&::before {
+				opacity: 1;
+			}
+		}
+		&-number {
+			font-size: 4rem;
+			font-weight: bold;
+		}
+		&-text {
+			font-size: 2.8rem;
+			text-transform: uppercase;
+			margin-left: 1.5rem;
+		}
+	}
+
+	@media screen and (max-width: 1023px) {
+		min-height: unset;
+		.header-bottom {
+			margin-top: 10.5rem;
+		}
+		.header-content {
+			padding-top: 10rem;
+		}
+		.header-content-main {
+			font-size: 8rem;
+		}
+		.header-bottom-text{
+			font-size: 2rem;
+		}
+		.header-bottom-number{
+			font-size: 3rem;
+		}
+		
+	}
+
+	@media screen and (max-width: 767px) {
+		.header-bottom-text {
+			display: none;
+		}
+		.header-content-caption {
+			font-size: 3rem;
+			margin-bottom: 1rem;
+		}
+		.header-content-main {
+			font-size: 5rem;
+			margin-bottom: 3rem;
+			padding-bottom: 3rem;
+		}
+		.header-bottom-item:before{
+			width: 35%;
+		}
+		.header-bottom {
+			margin-top: 5rem;
+		}
+		.header-content {
+			padding-top: 5rem;
+		}
+		.header-bottom-number{
+			font-size: 2.5rem;
+		}
+		.header-menu {
+			position: fixed;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			background-color: white;
+			width: 30rem;
+			display: block;
+			padding: 2rem 2.5rem;
+			z-index: 1;
+			transform: translateX(100%);
+			transition: transform 0.2s ease-in;
+		}
+
+		.header-menu.is-expand {
+			transform: translateX(0);
+		}
+
+		.header-menu-icon{
+			display: block;
+			color: $title-color;
+			padding: 1.3rem;
+			&:hover {
+				color: $primary-color;
+			}
+		}
+
+		.header-menu-link {
+			color: $title-color;
+			width: 100%;
+			padding: 1.3rem;
+			border-radius: 4px;
+			&:hover {
+				color: white;
+				background-color: $secondary-color;
+			}
+		}
+		.header-menu-item {
+			margin-bottom: 1rem;
+		}
+		.header-toggle {
+			display: block;
+			align-items: center;
+		}
+	}
+	
+	@include minWidth(768px) {
+		&-menu-item:not(:first-child) {
+			margin-left: 5rem;
+		}
+		&-menu-link {
+			color: white;
+			display: inline-block;
+			padding-bottom: 10px;
+			border-bottom: 4px solid transparent;
+		}
+	
+		&-menu-link:hover {
+			border-bottom: 2px solid $secondary-color;
+			color: $secondary-color
+		}
+	}
+}
+
+
+// Xóa dấu chấm thẻ li
+li::marker {
+	content: "";
+  }
