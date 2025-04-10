@@ -1,0 +1,54 @@
+.team{
+    padding: 10rem 0;
+
+    &-info{
+        margin-top: 3rem;
+        text-align: center;
+    }
+
+    &-name{
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+        font-weight: 550;
+    }
+
+    &-position{
+        font-size: 1.5rem;
+        font-weight: 300;
+        font-style: italic;
+        color: $text-color;
+    }
+
+    &-item{
+        max-width: 30%;
+    }
+
+    &-image{
+        @include size(100%);
+        object-fit: cover;
+    }
+
+    &-social{
+        @include flexBox(center,center);
+    }
+
+    &-social-item:not(:first-child){
+        border-left: 1px solid $primary-color;
+    }
+
+    &-social-link{
+        @include flexBox(center,center);
+        @include size(5.5rem);
+        color: $primary-color;
+        font-size: 2.3rem;
+        background-color: $secondary-color;
+        transition: all 0.2s ease;
+        &:hover{
+            color: white;
+            background-color: $primary-color;
+        }
+    }
+}
+@include hoverEffect(".team-main", ".team-content");
+
+
